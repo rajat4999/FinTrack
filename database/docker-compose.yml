@@ -1,0 +1,21 @@
+
+
+services:
+  mysql-server:
+    image: mysql:8.0
+    container_name: FinTrack_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1113
+      MYSQL_DATABASE: FinTrack_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    ports:
+      - "3307:3306"
+    volumes:
+      - FinTrack_mysql_data:/var/lib/mysql
+      # THE REQUIRED CHANGE: Map the init folder for auto-execution
+      - ./init:/docker-entrypoint-initdb.d
+
+volumes:
+  FinTrack_mysql_data:
